@@ -11,6 +11,15 @@ Vibecoding とは、開発者がロジックや創造性に集中し、退屈な
 > **VTI (Vibe Test Insight) とは？**
 > テストを単なる「合否判定」ではなく、コードの「意図（Vibe）」が正しく反映されているかを AI が評価し、開発者にインサイト（洞察）として還元するアプローチです。
 
+## 動作要件 (Prerequisites)
+
+Aether Lens の全機能を利用するには、以下のいずれかの LLM との接続が必要です。
+
+- **OpenAI**: GPT-4o (Recommended)
+- **Anthropic**: Claude 3.5 Sonnet
+- **Google**: Gemini 1.5 Pro
+- **Azure OpenAI**: (Configurable via `aether-lens.config.json`)
+
 ## Aether Platform との統合
 
 Aether Lens は Aether Platform のエコシステムに深く統合されています。プラットフォームが提供する実行基盤と AI コンテキストにより、複雑な設定なしで高度な解析が可能です。
@@ -134,15 +143,16 @@ Aether Lens は **Model Context Protocol (MCP)** を通じて、他の AI エー
 
 ### CLI で実行する場合 (Stand-alone)
 
-1. `aether-lens init` でプロジェクトを定義。
-2. `aether-lens --watch` で開発を開始。
+1. `aether-lens-cli init` でプロジェクトを定義。
+2. `aether-lens-cli . --watch` で開発を開始。
 3. コードを書くたびに、最適な「インサイト」が AI からリアルタイムで届けられます。
 
 ### MCP 経由で実行する場合 (Agent-Integrated)
 
 導入済みの AI エージェント（Cursor/Claude）に対して、短い言葉で指示を出してください。
 
-> 「Lens を設定して」
-> 「Lens を起動して」
+> 「Aether Lens を初期化して」 (`init_lens`)
+> 「Lens を起動して」 (`run_lens_test` または `start_lens_loop`)
+> 「今のバイブス（インサイト）を教えて」 (`get_vibe_insight`)
 
-これだけで、エージェントが状況を理解し、必要なツール（`init` や `start_lens_loop`）を自動的に呼び出します。
+これだけで、エージェントが状況を理解し、必要なツールを自動的に呼び出します。

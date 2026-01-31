@@ -1,0 +1,73 @@
+---
+title: For Developers
+description: How to install latest builds, specify versions, and use Git packages with Aether Lens.
+---
+
+# For Developers
+
+Aether Lens is under active development, and the latest features are immediately available as **Nightly Builds** on GitHub.
+You can also install specific commits or tags depending on your project requirements.
+
+## Installing from GitHub
+
+You can execute or install the tool directly from the GitHub repository using `uv` or `uvx`.
+
+### Using Nightly Build (Latest)
+
+To use the latest state of the `main` branch:
+
+```bash
+# Run from the latest main branch
+uvx --from git+https://github.com/aether-platform/aether-lens aether-lens-cli --version
+
+# Permanently install the latest main branch
+uv pip install git+https://github.com/aether-platform/aether-lens
+```
+
+### Version Pinning
+
+When you want to strictly lock the tool version for team development, specify a Git tag or commit hash.
+
+#### By Tag (Recommended)
+
+```bash
+# Specify the Nightly tag
+uvx --from git+https://github.com/aether-platform/aether-lens@nightly aether-lens-cli --version
+
+# Specify v0.1.0 tag
+uvx --from git+https://github.com/aether-platform/aether-lens@v0.1.0 aether-lens-cli --version
+```
+
+#### By Commit Hash
+
+Useful when you need to rollback to a specific change.
+
+```bash
+# Specify a commit hash (SHA)
+uvx --from git+https://github.com/aether-platform/aether-lens@a1b2c3d aether-lens-cli --version
+```
+
+## Applying to MCP Configuration
+
+If you want your AI Agents (Claude / AntiGravity) to use a specific version, configure the `args` in your settings file as follows:
+
+```json
+{
+  "mcpServers": {
+    "aether-lens": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/aether-platform/aether-lens@nightly",
+        "aether-lens-cli",
+        "mcp"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+```
+
+By configuring it this way, the entire team can share Aether Lens as a "living specification" that always behaves consistently.

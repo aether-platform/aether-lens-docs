@@ -1,0 +1,57 @@
+---
+title: Deployment Integration
+description: How to integrate Aether Lens with Docker Compose and Kustomize.
+---
+
+# Deployment Integration
+
+Aether Lens supports various deployment methods for local development environments and CI/CD pipelines.
+You can configure these interactively using the `init` command or by editing the configuration file directly.
+
+## Docker Compose
+
+For projects using Docker Compose, Aether Lens can be configured to automatically restart or update containers upon change detection.
+
+### Configuration
+
+Select `docker-compose` as the execution strategy when running `aether-lens-cli init`, or add the following to your `aether-lens.config.json`:
+
+```json
+{
+  "deployment": {
+    "type": "docker-compose",
+    "file": "docker-compose.yaml",
+    "service": "app" // (Optional) Specify if you only want to update a specific service
+  }
+}
+```
+
+### Behavior
+- When file changes are detected, the service state is updated based on the specified `docker-compose.yaml`.
+- In `watch` mode, tests are automatically executed after the container restart.
+
+## Kustomize
+
+If you are using Kustomize for Kubernetes deployment, you can integrate the flow of applying overlays and generating manifests.
+
+### Configuration
+
+Select `kustomize` as the execution strategy when running `aether-lens-cli init`, or add the following to the configuration file:
+
+```json
+{
+  "deployment": {
+    "type": "kustomize",
+    "path": "overlays/dev" // Path where Kustomization.yaml is located
+  }
+}
+```
+
+### Behavior
+- `kubectl apply -k <path>` is executed upon change detection.
+- Even when used with other tools like Tilt, Aether Lens functions as a trigger for test execution.
+
+## Caveats
+
+- **Path Resolution**: Paths in the configuration file are resolved relative to the root directory where `aether-lens-cli` is executed.
+- **Permissions**: Execution permissions for `kubectl` or `docker` commands are required.

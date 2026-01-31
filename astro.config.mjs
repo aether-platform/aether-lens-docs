@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "static",
   integrations: [
     mermaid(),
     starlight({
@@ -59,9 +60,24 @@ export default defineConfig({
               link: "/ja/guide/vibecoding/",
             },
             {
+              label: "Project Comparison",
+              translations: { ja: "プロジェクト比較" },
+              link: "/ja/guide/comparison/",
+            },
+            {
               label: "Local DevLoop",
               translations: { ja: "Local DevLoop の加速" },
               link: "/ja/guide/dev-loop/",
+            },
+            {
+              label: "For Developers",
+              translations: { ja: "開発者向けガイド" },
+              link: "/ja/guide/developer/",
+            },
+            {
+              label: "Deployment",
+              translations: { ja: "デプロイ連携" },
+              link: "/ja/guide/deployment/",
             },
           ],
         },

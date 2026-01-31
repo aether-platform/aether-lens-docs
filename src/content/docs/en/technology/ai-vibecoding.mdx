@@ -1,0 +1,36 @@
+---
+title: AI Agent Architecture
+description: The AI agent architecture supporting Aether Lens.
+---
+
+# AI Agent Architecture (VTI)
+
+The heart of Aether Lens is its unique **Vibe Test Insight (VTI)** analysis engine. It goes beyond simple static analysis or diff detection to multi-dimensionally understand the developer's "intent."
+
+## Aether Platform Context
+
+VTI analysis leverages the vast context of the Aether Platform.
+
+- **Platform Intelligence**: Automatically injects cloud infrastructure, deployment status, resource statistics, etc., into the analysis context.
+- **Shared Insights**: Insights gained from individual DevLoops are shared across the platform to improve team productivity.
+
+## 3-Layer Analysis Logic
+
+1. **Context Reaper**:
+   Constantly monitors not only project configuration but also environment settings on the Aether Platform.
+2. **Intent Scouter**:
+   Multi-dimensionally grasps "developer vibes" and "impact on the system" from Git diffs.
+3. **Action Weaver**:
+   Configures the optimal execution actions in cloud environments (Browserless, etc.) based on reasoning.
+
+## Optional Analysis Controls
+
+While it operates in full-auto by default, developers can fine-tune the analysis using the following "knobs."
+
+- **Frontend Strategy**: Forces UI regression checks.
+- **Backend Strategy**: Prioritizes logic analysis.
+- **Custom Instructions**: Injects unique rules via `aether-lens.config.json`.
+
+## Integration with Aether Platform
+
+Executed on the secure infrastructure of the Aether Platform, making large-scale project analysis both fast and safe. Analysis results are shared with external AI agents via the MCP (Model Context Protocol).

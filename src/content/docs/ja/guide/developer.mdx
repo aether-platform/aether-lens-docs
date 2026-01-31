@@ -1,0 +1,73 @@
+---
+title: 開発者向けガイド
+description: Aether Lens の最新ビルドや特定バージョンのインストール方法、Git パッケージの活用について。
+---
+
+# For Developers
+
+Aether Lens は活発に開発が進められており、最新機能は GitHub の **Nightly Build** として即座に利用可能です。
+また、プロジェクトの要件に応じて特定のコミットハッシュやタグを指定してインストールすることもできます。
+
+## GitHub からのインストール
+
+`uv` または `uvx` を使用して、GitHub リポジトリから直接ツールを実行・インストールできます。
+
+### Nightly Build (最新版) の利用
+
+最新の `main` ブランチの状態を利用したい場合、以下のコマンドで実行できます。
+
+```bash
+# 最新の main ブランチから実行
+uvx --from git+https://github.com/aether-platform/aether-lens aether-lens-cli --version
+
+# 最新の main ブランチをプロジェクトに永続インストール
+uv pip install git+https://github.com/aether-platform/aether-lens
+```
+
+### 特定バージョンの固定 (Pinning)
+
+チーム開発などでツールのバージョンを厳密に固定したい場合、Git のタグやコミットハッシュを指定します。
+
+#### タグ指定 (推奨)
+
+```bash
+# Nightly タグを指定
+uvx --from git+https://github.com/aether-platform/aether-lens@nightly aether-lens-cli --version
+
+# v0.1.0 タグを指定
+uvx --from git+https://github.com/aether-platform/aether-lens@v0.1.0 aether-lens-cli --version
+```
+
+#### コミットハッシュ指定
+
+特定の変更時点にロールバックしたい場合などに有効です。
+
+```bash
+# 特定のコミットハッシュ (SHA) を指定
+uvx --from git+https://github.com/aether-platform/aether-lens@a1b2c3d aether-lens-cli --version
+```
+
+## MCP 設定への応用
+
+AI エージェント (Claude / AntiGravity) に特定バージョンを使わせたい場合、設定ファイルの `args` を以下のように記述します。
+
+```json
+{
+  "mcpServers": {
+    "aether-lens": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/aether-platform/aether-lens@nightly",
+        "aether-lens-cli",
+        "mcp"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+```
+
+このように設定することで、チーム全体で常に同じバージョンの「動く仕様書」としての Aether Lens を共有できます。

@@ -1,0 +1,57 @@
+---
+title: デプロイメントガイド
+description: Aether Lens を Docker Compose や Kustomize と統合して使用する方法。
+---
+
+# Deployment Integration
+
+Aether Lens は、ローカル開発環境や CI/CD パイプラインにおける多様なデプロイ方法をサポートしています。
+`init` コマンドで対話的に設定できるほか、設定ファイルを直接編集して柔軟な構成が可能です。
+
+## Docker Compose
+
+Docker Compose を使用しているプロジェクトでは、変更検知時に自動的にコンテナを再起動または更新するように設定できます。
+
+### 設定方法
+
+`aether-lens-cli init` 実行時に実行戦略として `docker-compose` を選択するか、`aether-lens.config.json` に以下のように記述します。
+
+```json
+{
+  "deployment": {
+    "type": "docker-compose",
+    "file": "docker-compose.yaml",
+    "service": "app" // (Optional) 特定のサービスのみ更新する場合
+  }
+}
+```
+
+### 動作
+- ファイルの変更を検知すると、指定された `docker-compose.yaml` に基づいてサービスの状態を更新します。
+- `watch` モードでは、コンテナの再起動後に自動的にテストが実行されます。
+
+## Kustomize
+
+Kubernetes へのデプロイに Kustomize を使用している場合、オーバーレイを適用してマニフェストを生成・適用するフローを統合できます。
+
+### 設定方法
+
+`aether-lens-cli init` 実行時に実行戦略として `kustomize` を選択するか、設定ファイルに以下を記述します。
+
+```json
+{
+  "deployment": {
+    "type": "kustomize",
+    "path": "overlays/dev" // Kustomization.yaml があるパス
+  }
+}
+```
+
+### 動作
+- 変更検知時に `kubectl apply -k <path>` が実行されます。
+- Tilt などの他のツールと併用する場合でも、Aether Lens がテスト実行のトリガーとして機能します。
+
+## 注意事項 (Caveats)
+
+- **パスの解決**: 設定ファイル内のパスは、`aether-lens-cli` を実行するルートディレクトリからの相対パスとして解決されます。
+- **権限**: `kubectl` や `docker` コマンドが実行可能な権限が必要です。

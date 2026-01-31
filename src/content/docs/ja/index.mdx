@@ -1,9 +1,9 @@
 ---
-title: Aether Lens - Vibe Test Insight & DevLoop
-description: Aether Lensは、Vibe Test Insight (VTI) を通じて開発サイクルを劇的に加速させる、次世代のバイブコーディング支援ツールです。
+title: Aether Lens - Vibe Test Insight (powered by Aether Platform)
+description: Aether Lens は Aether Platform 搭載の Vibe Test Insight (VTI) を通じて開発サイクルを劇的に加速させる、次世代のバイブコーディング支援ツールです。
 template: splash
 hero:
-  tagline: Accelerate Your Development. AIがコードの「気分」を読み取り、最適なテストとフィードバックを即座に提供します。
+  tagline: Accelerate Your Development. AIがコードの「気分」を読み取り、最適なテストとフィードバックを即座に提供します。<br/> **Continuous Dev Loop like a Human**
   image:
     file: ../../../assets/logo-a-156.png
   actions:
@@ -18,8 +18,10 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 import CustomHero from '../../../components/landing/CustomHero.astro';
+import UserCloud from '../../../components/landing/UserCloud.astro';
 
 <CustomHero />
+<UserCloud />
 
 ## Vibe Test Insight (VTI) のもたらす革新
 
@@ -60,7 +62,12 @@ Aether Lens は、単なるテスト自動化ツールではありません。�
 
 Aether Lens で、あなたのプロジェクトを次のレベルへ。
 
-<Card title="クイックスタート" icon="right-arrow">
-  すでにプロジェクトをお持ちですか？ `uv pip install -e .` で今すぐ VTI を体験しましょう。
-  [セットアップガイドへ](/ja/guide/vibecoding/)
-</Card>
+  <Card title="Quick Start" icon="rocket">
+    **事前準備**: OpenAI / Anthropic / Gemini いずれかの API キーが必要です。
+
+    ```bash
+    # Install & Run (Nightly)
+    uvx --from git+https://github.com/aether-platform/aether-lens aether-lens-cli init
+    uvx --from git+https://github.com/aether-platform/aether-lens aether-lens-cli . --watch
+    ```
+  </Card>

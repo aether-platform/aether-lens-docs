@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/starlight": "^0.28.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@playwright/test": "^1.58.0",

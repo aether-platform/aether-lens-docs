@@ -152,9 +152,79 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"docs": {
+"en/guide/comparison.mdx": {
+	id: "en/guide/comparison.mdx";
+  slug: "en/guide/comparison";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/guide/deployment.mdx": {
+	id: "en/guide/deployment.mdx";
+  slug: "en/guide/deployment";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/guide/dev-loop.mdx": {
+	id: "en/guide/dev-loop.mdx";
+  slug: "en/guide/dev-loop";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/guide/developer.mdx": {
+	id: "en/guide/developer.mdx";
+  slug: "en/guide/developer";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/guide/vibecoding.mdx": {
+	id: "en/guide/vibecoding.mdx";
+  slug: "en/guide/vibecoding";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/index.mdx": {
+	id: "en/index.mdx";
+  slug: "en";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"en/technology/ai-vibecoding.mdx": {
+	id: "en/technology/ai-vibecoding.mdx";
+  slug: "en/technology/ai-vibecoding";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"ja/guide/comparison.mdx": {
+	id: "ja/guide/comparison.mdx";
+  slug: "ja/guide/comparison";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"ja/guide/deployment.mdx": {
+	id: "ja/guide/deployment.mdx";
+  slug: "ja/guide/deployment";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "ja/guide/dev-loop.mdx": {
 	id: "ja/guide/dev-loop.mdx";
   slug: "ja/guide/dev-loop";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"ja/guide/developer.mdx": {
+	id: "ja/guide/developer.mdx";
+  slug: "ja/guide/developer";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

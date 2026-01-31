@@ -1,0 +1,44 @@
+---
+title: Project Comparison
+description: Differences between Aether Lens and other tools like Testkube, and its role in the Aether Platform.
+---
+
+# Project Comparison
+
+Aether Lens is a tool specialized for "personal productivity" and "fast feedback" in the development environment. Here we summarize the differences between Aether Lens and other tools like **Testkube**, which is known as a Kubernetes-native test orchestrator.
+
+## The Core Difference: Personal vs. Team
+
+| Feature | Aether Lens | Testkube / Other CI Tools |
+| :--- | :--- | :--- |
+| **Main Target** | **Individual (Personal)** | **Team / Organization (Team)** |
+| **Primary Use** | **Local Dev Loop Acceleration** | Test Orchestration |
+| **Feedback Speed** | **Milliseconds to Seconds (Instant)** | Minutes (Pipeline dependent) |
+| **Analysis Engine** | Vibe Test Insight (AI Intent) | Predefined Test Suites |
+| **Infrastructure** | Developer's machine + Aether Platform | Inside Kubernetes Cluster |
+| **Trigger Timing** | Automatic on save (Live) | Triggers on Push/PR |
+
+## Why Choose Aether Lens
+
+### 1. Feedback that reads the "Vibe"
+While Testkube excels at running described tests efficiently, Aether Lens has an AI that suggests "what to check now." In vibecoding, the greatest value is not stopping the developer's thoughts.
+
+### 2. Specialized for Personal Local Dev Loop
+Most CI/CD tools aim for "build and deploy," but Aether Lens supports the trial and error "while writing code." The experience of manipulating Headless Browsers on the platform as if they were local tools is unique to Aether Lens.
+
+### 3. Advantage of Being Powered by Aether Platform
+On the Aether Platform, you can dynamically utilize verification resources on Kubernetes without additional setup. This is the shortest path to meeting the quality standards required by the team (VRT, etc.) while maintaining personal development speed.
+
+---
+
+## Guidelines for Use
+
+- **When to use Aether Lens**:
+  - To immediately check for UI breakage or logic impact while implementing a new feature.
+  - To have an AI agent (Cursor, Claude, etc.) autonomously fix and verify code.
+  - To perform advanced verification without consuming local PC resources.
+
+- **When to use Testkube / CI Tools**:
+  - To run all tests comprehensively as a quality gate for the entire team.
+  - To accumulate long-term test reports within a production-like Kubernetes cluster.
+  - To periodically run large-scale regression tests spanning multiple microservices.

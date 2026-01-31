@@ -1,0 +1,55 @@
+---
+title: Accelerating Local DevLoop
+description: Aether Lens's Local DevLoop support features that shorten development cycles by milliseconds.
+---
+
+# Local DevLoop Acceleration
+
+In modern development, the biggest bottleneck is the "lag between rewriting and verification." Aether Lens utilizes AI analysis and a fast feedback loop to shorten this cycle to the extreme.
+
+## Execution Infrastructure on Aether Platform Native
+
+As part of the Aether Platform, Aether Lens natively leverages a powerful cloud execution environment.
+
+- **LensDaemon**: A service that manages the monitoring and execution lifecycle. It synchronizes with the platform to optimize resources.
+- **Browserless Orchestrator**: Works with the sidecar environment on the platform to execute heavy rendering processes and multi-device verification in parallel on the cloud.
+- **Smart Debouncing**: Provides smooth feedback to developers even with fast edits, while reducing the load on the platform side.
+
+## Automated Pipeline
+
+1. **Code Edit**: Developer saves a file.
+2. **AI Vibe Check**: AI determines the "intent" and "risk" of changes in seconds.
+3. **Execution**: Automatically runs a minimum set of tests (Visual / Command).
+4. **Insight Feed**: Aggregates analysis results and execution status into the CLI summary panel.
+
+---
+
+## Quick Start
+
+### 1. Installation
+
+Using `uv` allows for fast and clean dependency resolution.
+
+```bash
+uv pip install -e . --system
+```
+
+### 2. Initial Setup
+
+Select a strategy that suits your project interactively.
+
+```bash
+aether-lens-cli init
+```
+
+### 3. Start LIVE Monitoring
+
+As soon as you start `watch` mode, the Local DevLoop begins.
+
+```bash
+aether-lens-cli . --watch
+```
+
+> [!NOTE]
+> **Monitoring the entire workspace**
+> By specifying a target directory (e.g., `./sample`), you can also monitor only specific microservices or components.
