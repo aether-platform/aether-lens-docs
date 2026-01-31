@@ -1,0 +1,36 @@
+---
+title: Local DevLoop の加速
+description: 開発サイクルをミリ秒単位で縮める Aether Lens の Local DevLoop 支援機能。
+---
+
+# Local DevLoop Acceleration
+
+モダンな開発において、最大のボトルネックは「書き換えてから確認するまでのラグ」です。Aether Lensはこのループを極限まで短縮します。
+
+## ハイブリッド実行モデル
+
+Aether Lensは環境に応じて最適な実行パスを自動で選択します。
+
+### 1. ローカル・オンデマンド実行
+開発機のリソースを節約するため、必要な時だけ軽量なプロセスとしてレンズを起動します。
+
+### 2. K8s サイドカー実行
+Aether Platform上では、専用の Browserless サイドカーと連携。重い描画処理をクラウド側に逃がしつつ、操作感はローカルと同等です。
+
+## 自動化されたパイプライン
+
+1. **Code Edit**: ファイル保存。
+2. **AI Triage**: AIが変更箇所の重要度を判定。
+3. **Execution**: 最小限のテスト・検証セットを実行。
+4. **Visual Feed**: Allure / ReportPortal を通じた即時フィードバック。
+
+## 始め方
+
+あなたのプロジェクトディレクトリで以下のコマンドを実行するだけです。
+
+```bash
+pip install -e .
+aether-lens .
+```
+
+Aether Lensがプロジェクトをスキャンし、`Local DevLoop` の準備を整えます。

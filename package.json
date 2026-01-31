@@ -1,0 +1,38 @@
+{
+  "name": "aether-lens-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "lens": "aether-lens .",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prepare": "husky",
+    "vrt:snapshot": "HTTP_PROXY= HTTPS_PROXY= playwright test tests/vrt.spec.ts",
+    "vrt:run": "lost-pixel"
+  },
+  "lint-staged": {
+    "**/*.{md,mdx}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/starlight": "^0.28.0",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@playwright/test": "^1.58.0",
+    "astro": "^4.16.0",
+    "astro-mermaid": "^1.3.1",
+    "mermaid": "^11.12.2",
+    "sharp": "^0.33.0",
+    "typed.js": "^3.0.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "lost-pixel": "^3.22.0"
+  }
+}

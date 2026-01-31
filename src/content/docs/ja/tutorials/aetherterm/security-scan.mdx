@@ -1,0 +1,36 @@
+---
+sidebar: {}
+title: セキュリティスキャンの実行
+description: "AetherTermを使用して脆弱性をスキャンする方法"
+icon: "shield-halved"
+---
+
+## 前提条件
+
+- アクティブなワークスペース。
+- AetherTermアクセスが有効になっていること。
+- 接続されたMCP機能（エンタープライズテナントの場合は自動構成されます）。
+
+## ステップ 1: AetherTermを開く
+
+`Ctrl + ~`（Macの場合は `Cmd + ~`）を押して、IDE内のAetherTermオーバーレイを切り替えます。
+
+## ステップ 2: スキャンを要求
+
+次の自然言語コマンドを入力します:
+
+> "Scan the current build artifact for critical vulnerabilities using the on-prem scanner."
+> (オンプレミススキャナーを使用して、現在のビルドアーティファクトの重大な脆弱性をスキャンして。)
+
+## ステップ 3: 結果の確認
+
+1. AetherTermはMCPを介してセキュリティスキャナーに連絡します。
+2. 発見されたCVEのサマリーテーブルをターミナルに直接表示します。
+3. CVE IDをクリックすると、AIエージェントによって生成された推奨される修復パスが表示されます。
+
+```text
+[AetherTerm] Scan Complete. Found 2 High Severity issues.
+| ID | Package | Fix Version |
+|----|---------|-------------|
+| CVE-2024-1234 | libssl | 3.1.2 |
+```

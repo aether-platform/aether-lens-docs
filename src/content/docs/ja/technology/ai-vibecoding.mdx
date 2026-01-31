@@ -1,0 +1,21 @@
+---
+title: AIエージェント構成
+description: Aether Lensを支えるAIエージェントのアーキテクチャ。
+---
+
+# AI Agent Architecture
+
+Aether Lensの心臓部は、独自のAI解析エンジンです。
+
+## 3層の解析ロジック
+
+1. **Context Reaper**:
+   プロジェクトの構成、依存関係、過去の変更履歴を常時モニタリング。
+2. **Intent Scouter**:
+   開発者のコード編集から「何を検証したいのか」を推論。
+3. **Action Weaver**:
+   推論に基づき、Playwrightのスクリプトやバイジュアル検証のパラメータをリアルタイム生成。
+
+## Aether Platform との統合
+
+Aether Platformの `AI Namespace` 内でサンドボックス実行されるため、安全にプロジェクト全体の解析を行うことができます。

@@ -1,0 +1,44 @@
+---
+sidebar: {}
+title: SBOMとセキュリティスキャン
+description: "MCPによる自動脆弱性管理"
+icon: "fingerprint"
+---
+
+## 概要
+
+このチュートリアルでは、AetherTermを使用してSBOMを生成し、統合ツール（SnykまたはTrivy）を使用して脆弱性をスキャンします。
+
+## 前提条件
+
+- アクティブなワークスペース
+- AetherTermが有効
+
+## ステップ 1: SBOMの生成
+
+AetherTermを開き、次の自然言語コマンドを実行します:
+
+> "Generate a CycloneDX SBOM for the current node project and save it to bom.json"
+> (現在のnodeプロジェクトのCycloneDX SBOMを生成し、bom.jsonに保存して。)
+
+AetherTermは適切な基盤ツール（例：`syft` または `cyclonedx-npm`）を実行します:
+
+```bash
+syft . -o cyclonedx-json=bom.json
+```
+
+## ステップ 2: 脆弱性スキャン
+
+AetherTermに、深刻度の高い問題についてSBOMをスキャンするように依頼します:
+
+> "Scan bom.json for critical CVEs using the Snyk integration"
+> (Snyk統合を使用して、bom.jsonの重大なCVEをスキャンして。)
+
+## ステップ 3: 修復
+
+脆弱性が見つかった場合は、AetherTermのMCP機能を使用して修正を適用します:
+
+> "Update package.json to fix the identified vulnerabilities"
+> (package.jsonを更新して、特定された脆弱性を修正して。)
+
+エージェントは自動的にバージョンを安全な最小限のものに上げ、ロックファイルを再生成します。

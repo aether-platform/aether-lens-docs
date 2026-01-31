@@ -1,0 +1,442 @@
+---
+const { tagline, actions = [] } = Astro.props;
+import type { Props } from "@astrojs/starlight/props";
+import { LinkButton } from "@astrojs/starlight/components";
+import logoWide from "../../assets/logo-shape-wide.png";
+import logoSquare from "../../assets/logo-shape-square.png";
+---
+
+<div class="hero-container">
+  {/* Full-screen Background Visuals */}
+  <div class="hero-bg-wrapper">
+    <div class="a-frame">
+      <video
+        class="a-background-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="https://images.unsplash.com/photo-1462331940025-496dfbfc7564"
+      >
+        <source
+          src="https://cdn.pixabay.com/video/2020/09/20/50549-462322306_large.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+  </div>
+
+  {/* Centered Content Overlay */}
+  <div class="hero-content">
+    <div class="content-inner">
+      <h1>Aether Platform</h1>
+      <div class="sub-heading">
+        <p class="main-line">Comprehensive DevX Platform</p>
+        <p class="sub-line">
+          aim to lead <span id="typed-output" class="highlight-text"
+            >Your Business</span
+          > to Edge.
+        </p>
+      </div>
+      <p class="tagline" set:html={tagline} />
+
+      <div class="hero-actions">
+        {
+          Array.isArray(actions) && (actions as any).length > 0 ? (
+            actions.map((action: any) => (
+              <LinkButton
+                href={action.link}
+                variant={action.variant}
+                icon={action.icon}
+              >
+                {action.text}
+              </LinkButton>
+            ))
+          ) : (
+            <LinkButton
+              href="./introduction"
+              variant="primary"
+              icon="right-arrow"
+            >
+              See Document
+            </LinkButton>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  {/* Scroll Down Button */}
+  <a href="#first-section" class="scroll-down-btn" aria-label="Scroll down">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <div class="arrows">
+      <span class="m_scroll_arrows unu"></span>
+      <span class="m_scroll_arrows doi"></span>
+      <span class="m_scroll_arrows trei"></span>
+    </div>
+  </a>
+</div>
+
+<script>
+  import Typed from "typed.js";
+
+  // Header visibility logic
+  const header = document.querySelector("header");
+  if (header) {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      if (scrollPos > window.innerHeight * 0.7) {
+        document.body.classList.add("header-visible");
+      } else {
+        document.body.classList.remove("header-visible");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    setTimeout(() => {
+      if (!document.body.classList.contains("header-visible")) {
+        document.body.classList.add("header-visible");
+      }
+    }, 5000);
+  }
+
+  // Smooth scroll
+  const scrollBtn = document.querySelector(".scroll-down-btn");
+  if (scrollBtn) {
+    scrollBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const next =
+        document.getElementById("first-section") ||
+        document.querySelector("section");
+      if (next) next.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // Typed.js
+  const typedElement = document.getElementById("typed-output");
+  if (typedElement) {
+    new Typed("#typed-output", {
+      strings: [
+        "Your Business",
+        "Your System",
+        "Your Development",
+        "Your Learning",
+        "Your Research",
+        "Your MLOps",
+        "Your Site Reliability",
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      loop: true,
+      showCursor: true,
+      cursorChar: "|",
+    });
+  }
+</script>
+
+<style is:global>
+  /* Landing page specific header hide/show */
+  :root[data-template="splash"] header {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  body[data-template="splash"].header-visible header {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<style
+  define:vars={{
+    logoWideUrl: `url(${logoWide.src})`,
+    logoSquareUrl: `url(${logoSquare.src})`,
+  }}
+>
+  .hero-container {
+    --hero-bg: #fff;
+    --hero-text: #000;
+    --mask-fill: #fff;
+    --logoUrl: var(--logoWideUrl); /* Default to wide */
+    --glow-color: rgba(59, 130, 246, 0.1);
+
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    background: var(--hero-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global([data-theme="dark"]) .hero-container {
+    --hero-bg: #000;
+    --hero-text: #fff;
+    --mask-fill: #000;
+    --glow-color: rgba(59, 130, 246, 0.2);
+  }
+
+  /* Full Screen Background Visual */
+  .hero-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .a-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    /* 
+       Directly show video inside logo shape.
+       If the mask image is "inverted" (hole in a solid), we use exclude with a base black layer to show the video in the hole.
+    */
+    mask-image: var(--logoUrl), linear-gradient(#000, #000);
+    -webkit-mask-image: var(--logoUrl), linear-gradient(#000, #000);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+
+    mask-size:
+      auto 100vh,
+      100% 100%;
+    -webkit-mask-size:
+      auto 100vh,
+      100% 100%;
+    mask-repeat: no-repeat, no-repeat;
+    -webkit-mask-repeat: no-repeat, no-repeat;
+    mask-position:
+      left center,
+      center;
+    -webkit-mask-position:
+      left center,
+      center;
+  }
+
+  @media (max-width: 768px) {
+    .hero-container {
+      --logoUrl: var(--logoSquareUrl);
+    }
+    .a-frame {
+      /* Square logo: Center and fit better on mobile */
+      mask-size:
+        contain,
+        100% 100%;
+      -webkit-mask-size:
+        contain,
+        100% 100%;
+      mask-position:
+        center center,
+        center;
+      -webkit-mask-position:
+        center center,
+        center;
+    }
+    .hero-bg-wrapper {
+      justify-content: center;
+    }
+  }
+
+  .a-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    opacity: 0.9;
+  }
+
+  /* Centered Content Section */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    /* Adding subtle backdrop if background makes text hard to read */
+    padding: 3rem;
+    border-radius: 2rem;
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 12vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--hero-text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.04em;
+    /* Lofted multi-layer shadow */
+    text-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.25),
+      0 20px 60px rgba(0, 0, 0, 0.15),
+      0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .sub-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .main-line {
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--hero-text);
+    opacity: 0.95;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .sub-line {
+    font-size: clamp(1rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--hero-text);
+    opacity: 0.85;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .highlight-text {
+    border-bottom: 2px solid currentColor;
+    display: inline-block;
+    min-width: 8em;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    max-width: 800px;
+    color: var(--hero-text);
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0 auto;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* Scroll Down Button */
+  .scroll-down-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    text-decoration: none;
+  }
+  .scroll-down-btn:hover {
+    opacity: 1;
+  }
+
+  .mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--hero-text);
+    border-radius: 12px;
+    position: relative;
+  }
+  .wheel {
+    width: 4px;
+    height: 6px;
+    background: var(--hero-text);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+  }
+  @keyframes scroll-wheel {
+    0% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(12px);
+    }
+  }
+
+  .m_scroll_arrows {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--hero-text);
+    border-bottom: 2px solid var(--hero-text);
+    transform: rotate(45deg);
+    margin-top: -4px;
+    animation: mouse-scroll 1.5s infinite;
+  }
+  .unu {
+    animation-delay: 0s;
+  }
+  .doi {
+    animation-delay: 0.2s;
+  }
+  .trei {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes mouse-scroll {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 1rem;
+    }
+    h1 {
+      font-size: 3.5rem;
+    }
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+  }
+</style>

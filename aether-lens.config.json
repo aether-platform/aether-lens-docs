@@ -1,0 +1,25 @@
+{
+    "project_name": "aether-lens-docs",
+    "vibecoding": {
+        "theme": "premium-dark",
+        "focus": [
+            "ux",
+            "aesthetics",
+            "performance"
+        ],
+        "ai_agent": {
+            "mode": "proactive",
+            "analysis_targets": [
+                "src/content/docs",
+                "src/components/landing"
+            ]
+        }
+    },
+    "dev_loop": {
+        "auto_verify": true,
+        "browser_targets": [
+            "desktop",
+            "mobile"
+        ]
+    }
+}
