@@ -1,5 +1,7 @@
 {
     "project_name": "aether-lens-docs",
+    "strategy": "auto",
+    "browser_strategy": "docker",
     "vibecoding": {
         "theme": "premium-dark",
         "focus": [

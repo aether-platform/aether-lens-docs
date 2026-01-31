@@ -22,6 +22,24 @@ As part of the Aether Platform, Aether Lens natively leverages a powerful cloud 
 3. **Execution**: Automatically runs a minimum set of tests (Visual / Command).
 4. **Insight Feed**: Aggregates analysis results and execution status into the CLI summary panel.
 
+### 🕒 A Day in the Life with Vibe Coding
+
+Let's simulate a typical day of development with Aether Lens.
+
+- **09:00**: Tweak button design. Lens instantly generates `Mobile` and `Tablet` screenshots. Detects "Padding issue" notification.
+- **10:30**: Refactor complex authentication logic. Lens applies `Backend Strategy` in the background, automatically selecting and running relevant test cases.
+- **14:00**: Create a pull request for a new feature. Lens shares verification results with the PR Agent via `A2A Context`.
+
+---
+
+## Troubleshooting
+
+| Incident | Cause | Solution |
+| :--- | :--- | :--- |
+| **Slow tests** | Too many browser instances running | Switch `browser_strategy` to `docker` or `kubernetes`. |
+| **Diff not detected** | Included in `.gitignore` | Check the `excludes` in `aether-lens.config.json`. |
+| **Inappropriate AI response** | Lack of context | Set `strategy` to `custom` and add `custom_instruction`. |
+
 ---
 
 ## Quick Start

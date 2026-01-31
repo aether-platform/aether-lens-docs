@@ -36,6 +36,17 @@ Aether Lens は Aether Platform のエコシステムに深く統合されてい
 | **Microservice** | スコープ横断 | ワークスペース全体やサービス間整合性を解析。 |
 | **Custom** | 独自定義 | `custom_instruction` による特化解析。 |
 
+### 🧠 Advanced: Custom Instructions
+
+`aether-lens.config.json` の `custom_instruction` フィールドを使用することで、AI の解析ロジックをプロジェクト固有のコンテキストで強化できます。
+
+```json
+{
+  "strategy": "custom",
+  "custom_instruction": "このプロジェクトはアクセシビリティを最優先しています。ARIA 属性の欠如や色のコントラスト比について特に厳しくチェックし、改善案を提示してください。"
+}
+```
+
 ## 検証タイプ詳細 (Capabilities)
 
 Aether Lens が提案・実行するテストの具体例です。
@@ -68,6 +79,16 @@ Playwright を使用して、ヘッドレスブラウザ上で実際の描画結
 
 Aether Lens は、異なるレイヤーのテストを束ねる **Aggregation Layer** として機能します。単なるテストランナーではなく、各種ツール（Jest, Playwright, Backend Check）の指揮者として振る舞います。
 
+```mermaid
+graph TD
+    A[Code Change] --> B{Lens Aggregator}
+    B --> C[Unit: Logic Check]
+    B --> D[Integration: API Check]
+    B --> E[E2E: Visual Check]
+    C & D & E --> F[Unified Insight Report]
+    F --> G[Developer / AI Agent]
+```
+
 - **Layered Execution**: Unit (Logic), Integration (API), E2E (Visual) を並列または依存関係順に実行。
 - **Unified Insight**: 「UI の崩れ」と「バックエンドの型エラー」を突き合わせ、根本原因（Root Cause）を特定します。
 
@@ -92,6 +113,20 @@ Aether Lens は **Model Context Protocol (MCP)** を通じて、他の AI エー
 
 - **Structured Insight**: 解析結果を構造化データとして提供。
 - **Autonomous DevLoop**: エージェント同士が自律的に修正・検証サイクルを回します。
+
+```mermaid
+sequenceDiagram
+    participant A as Vibe Coding Agent
+    participant L as Aether Lens (MCP)
+    participant E as Execution Env
+    
+    A->>L: 変更意図の送信 & 検証依頼
+    L->>E: 最適化されたテストの実行
+    E-->>L: 実行結果 (画像/ログ)
+    L->>A: 構造化されたインサイトの提供
+    Note over A: インサイトに基づき自律修正
+    A->>L: 再検証依頼
+```
 
 #### MCP 導入ガイド
 

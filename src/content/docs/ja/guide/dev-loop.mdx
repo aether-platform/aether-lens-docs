@@ -14,12 +14,28 @@ Aether Lens は Aether Platform の一部として、強力なクラウド実行
 - **Browserless Orchestrator**: プラットフォーム上のサイドカー環境と連携し、重い描画処理やマルチデバイス検証をクラウド側で並列実行。
 - **Smart Debouncing**: 高速な編集でも、プラットフォーム側の負荷を抑えつつ開発者にはスムーズなフィードバックを提供。
 
-## 自動化されたパイプライン
-
 1. **Code Edit**: 開発者がファイルを保存。
 2. **AI Vibe Check**: AI が変更の「意図」と「リスク」を数秒で判定。
 3. **Execution**: 最小限のテスト（Visual / Command）セットを自動実行。
 4. **Insight Feed**: 解析結果と実行状況を CLI のサマリパネルに集約。
+
+### 🕒 A Day in the Life with Vibe Coding
+
+Aether Lens がある開発の日常をシミュレーションしてみましょう。
+
+- **09:00**: ボタンのデザインを微調整。Lens が即座に `Mobile`, `Tablet` のスクリーンショットを生成。「パディングが崩れています」という通知。
+- **10:30**: 複雑な認証ロジックをリファクタリング。Lens が裏側で `Backend Strategy` を適用し、既存のテストケースを自動抽出して実行。
+- **14:00**: 新機能のプルリクエストを作成。Lens が `A2A Context` を通じて PR エージェントに検証結果を共有。
+
+---
+
+## トラブルシューティング
+
+| 事象 | 原因 | 対処法 |
+| :--- | :--- | :--- |
+| **テストが遅い** | 多くのブラウザインスタンスが起動している | `browser_strategy` を `docker` または `kubernetes` に切り替えてください。 |
+| **差分が検知されない** | `.gitignore` に含まれている | `aether-lens.config.json` の `excludes` を確認してください。 |
+| **AI の返答が不適切** | コンテキストが不足している | `strategy` を `custom` に設定し、`custom_instruction` を追加してください。 |
 
 ---
 

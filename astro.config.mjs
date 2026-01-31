@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     mermaid(),
     starlight({
-      title: "Aether Lens",
+      title: 'Aether Lens | New Value "Vibe Test Insights" by Aether Platform',
       logo: {
         src: "./src/assets/logo-a-156.png",
       },

@@ -34,7 +34,18 @@ By default, analysis is performed based on the optimal judgment of the Aether Pl
 | **Frontend** | UI Focused | Forces Visual Regression and multi-device validation. |
 | **Backend** | Logic Focused | Prioritizes API expectations and data integrity analysis. |
 | **Microservice** | Cross-Scope | Analyzes workspace-wide and inter-service consistency. |
-| **Custom** | User Defined | Specialized analysis via `custom_instruction`. |
+| **Custom** | Custom Defined | Specialized analysis via `custom_instruction`. |
+
+### 🧠 Advanced: Custom Instructions
+
+By using the `custom_instruction` field in `aether-lens.config.json`, you can enhance the AI analysis logic with project-specific context.
+
+```json
+{
+  "strategy": "custom",
+  "custom_instruction": "This project prioritizes accessibility. Check strictly for missing ARIA attributes or color contrast issues and provide improvement suggestions."
+}
+```
 
 ## Capabilities (Verification Types)
 
@@ -66,10 +77,20 @@ Choose where to execute verifications based on project size and environment.
 
 ### 🧩 Aggregation Layer (Multi-Layer Test)
 
-Aether Lens functions as an **Aggregation Layer** that bundles tests from different layers. It acts not just as a test runner, but as a conductor for various tools (Jest, Playwright, Backend Check).
+Aether Lens functions as an **Aggregation Layer** that bundles tests from different layers. Rather than just a test runner, it acts as a conductor for various tools (Jest, Playwright, Backend Check).
 
-- **Layered Execution**: Runs Unit (Logic), Integration (API), and E2E (Visual) tests in parallel or in order of dependency.
-- **Unified Insight**: Correlates "UI breakage" with "Backend type errors" to identify the **Root Cause**.
+```mermaid
+graph TD
+    A[Code Change] --> B{Lens Aggregator}
+    B --> C[Unit: Logic Check]
+    B --> D[Integration: API Check]
+    B --> E[E2E: Visual Check]
+    C & D & E --> F[Unified Insight Report]
+    F --> G[Developer / AI Agent]
+```
+
+- **Layered Execution**: Executes Unit (Logic), Integration (API), and E2E (Visual) tests in parallel or in dependency order.
+- **Unified Insight**: Correlates "UI breakage" and "backend type errors" to identify the **Root Cause**.
 
 > [!TIP]
 > **Aether Platform Native**
@@ -91,7 +112,21 @@ import { TabItem, Tabs } from '@astrojs/starlight/components';
 Aether Lens achieves advanced collaboration with other AI agents (A2A) via the **Model Context Protocol (MCP)**.
 
 - **Structured Insight**: Provides analysis results as structured data.
-- **Autonomous DevLoop**: Agents autonomously perform fix-verify cycles between each other.
+- **Autonomous DevLoop**: Enables agents to autonomously cycle through fixes and verifications.
+
+```mermaid
+sequenceDiagram
+    participant A as Vibe Coding Agent
+    participant L as Aether Lens (MCP)
+    participant E as Execution Env
+    
+    A->>L: Send intent & request verification
+    L->>E: Execute optimized tests
+    E-->>L: Results (images/logs)
+    L->>A: Provide structured insights
+    Note over A: Autonomous fix based on insight
+    A->>L: Request re-verification
+```
 
 #### MCP Setup Guide
 
