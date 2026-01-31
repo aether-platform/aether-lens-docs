@@ -1,0 +1,11 @@
+{
+  "strategy": "auto",
+  "custom_instruction": "",
+  "dev_loop": {
+    "browser_targets": [
+      "desktop",
+      "mobile"
+    ],
+    "debounce_seconds": 2
+  }
+}

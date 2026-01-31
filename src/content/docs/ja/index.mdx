@@ -1,9 +1,9 @@
 ---
-title: Aether Lens - AI-Powered Vibecoding & Local DevLoop
-description: Aether Lensは、設定不要でテスト・可視化・AI解析を統合し、開発者の「Local DevLoop」を劇的に加速させるバイブコーディング支援ツールです。
+title: Aether Lens - Vibe Test Insight & DevLoop
+description: Aether Lensは、Vibe Test Insight (VTI) を通じて開発サイクルを劇的に加速させる、次世代のバイブコーディング支援ツールです。
 template: splash
 hero:
-  tagline: 設定不要でテスト・可視化・AI解析を統合。バイブスの赴くままにコードを書こう。
+  tagline: Accelerate Your Development. AIがコードの「気分」を読み取り、最適なテストとフィードバックを即座に提供します。
   image:
     file: ../../../assets/logo-a-156.png
   actions:
@@ -16,19 +16,51 @@ hero:
       icon: external
 ---
 
+import { Card, CardGrid } from '@astrojs/starlight/components';
 import CustomHero from '../../../components/landing/CustomHero.astro';
 
 <CustomHero />
 
-## なぜ Aether Lens なのか？
+## Vibe Test Insight (VTI) のもたらす革新
 
-開発の「バイブス」を止めるのは、複雑なテスト設定や環境構築です。Aether Lensはそれらを「Zero Config」で解決します。
+Aether Lens は、単なるテスト自動化ツールではありません。開発者の「バイブス」を理解し、サイクルを極限まで短縮するための知性です。
 
-### 1. 究極の Local DevLoop
-コードを書いた瞬間に何が起きているかをAIが察知し、必要なテストを自動実行・提案します。
+<CardGrid stagger>
+  <Card title="Vibe Reading" icon="pencil">
+    差分ではなく「意図」を解析。AIが最適な検証シナリオを自動構成します。
+  </Card>
+  <Card title="Platform Native" icon="seti:db">
+    Aether Platform の実行基盤と密結合。クラウドの力をローカルの速度で。
+  </Card>
+  <Card title="Instant Feedback" icon="rocket">
+    保存から結果まで数秒。思考を止めないフィードバックループを実現します。
+  </Card>
+  <Card title="A2A Collaboration" icon="random">
+    Aether Lens は他の AI エージェント（Cursor, Claude 等）と対話。テスト結果をインサイトとして共有し、自律的な修正を支援します。
+  </Card>
+</CardGrid>
 
-### 2. AIによるバイジュアル検証
-Browserless OSSと連携し、Mobile/Desktop等のマルチサイズ表示崩れをAIが自動検知します。
+---
 
-### 3. 設定不要 (Zero Config)
-`aether-lens` コマンドを叩くだけ。あなたのプロジェクトを理解し、最適なレンズを提供します。
+## Accelerate Your Development
+
+"Code changes shouldn't just run tests; they should reveal insights."
+
+開発のスピードを左右するのは、「確認待ち」の時間です。Aether Lens はそれらを最小化し、あなたが最もクリエイティブな瞬間に留まれるようにします。
+
+### ⚡️ 次世代のフィードバック・ループ
+
+1. **Focus on Quality**: AIがリグレッションを監視し、自信を持ってプッシュできます。
+2. **Context-Aware**: あなたのプロジェクト特有のルールや「雰囲気」を学習し、適切なアドバイスを行います。
+3. **Zero Configuration**: `aether-lens init` と `aether-lens --watch`。それだけで、プロジェクトが知性を持ち始めます。
+
+---
+
+## 始めましょう
+
+Aether Lens で、あなたのプロジェクトを次のレベルへ。
+
+<Card title="クイックスタート" icon="right-arrow">
+  すでにプロジェクトをお持ちですか？ `uv pip install -e .` で今すぐ VTI を体験しましょう。
+  [セットアップガイドへ](/ja/guide/vibecoding/)
+</Card>

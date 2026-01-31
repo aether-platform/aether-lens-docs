@@ -4,6 +4,21 @@ import type { Props } from "@astrojs/starlight/props";
 import { LinkButton } from "@astrojs/starlight/components";
 import logoWide from "../../assets/logo-shape-wide.png";
 import logoSquare from "../../assets/logo-shape-square.png";
+
+const slides = [
+  {
+    title: "Vibe Test Insight",
+    sub: "Accelerate Your Development",
+  },
+  {
+    title: "Continuous Local CI",
+    sub: "Zero-Config Kubernetes Native",
+  },
+  {
+    title: "Aggregation Layer",
+    sub: "Unified Insight for Multi-Layer Tests",
+  },
+];
 ---
 
 <div class="hero-container">
@@ -26,18 +41,27 @@ import logoSquare from "../../assets/logo-shape-square.png";
     </div>
   </div>
 
-  {/* Centered Content Overlay */}
+  {/* Carousel Content Overlay */}
   <div class="hero-content">
     <div class="content-inner">
-      <h1>Aether Platform</h1>
-      <div class="sub-heading">
-        <p class="main-line">Comprehensive DevX Platform</p>
-        <p class="sub-line">
-          aim to lead <span id="typed-output" class="highlight-text"
-            >Your Business</span
-          > to Edge.
-        </p>
+      <h1>Aether Lens</h1>
+
+      <div class="carousel-track">
+        {
+          slides.map((slide, index) => (
+            <div
+              class={`carousel-slide ${index === 0 ? "active" : ""}`}
+              data-index={index}
+            >
+              <div class="sub-heading">
+                <p class="main-line">{slide.title}</p>
+                <p class="sub-line highlight-text">{slide.sub}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
+
       <p class="tagline" set:html={tagline} />
 
       <div class="hero-actions">
@@ -80,7 +104,23 @@ import logoSquare from "../../assets/logo-shape-square.png";
 </div>
 
 <script>
-  import Typed from "typed.js";
+  // Build a simple cross-fade carousel
+  const slides = document.querySelectorAll(".carousel-slide");
+  let currentIndex = 0;
+  const intervalTime = 4000; // 4 seconds per slide
+
+  if (slides.length > 0) {
+    setInterval(() => {
+      // Remove active from current
+      slides[currentIndex].classList.remove("active");
+
+      // Calculate next
+      currentIndex = (currentIndex + 1) % slides.length;
+
+      // Add active to next
+      slides[currentIndex].classList.add("active");
+    }, intervalTime);
+  }
 
   // Header visibility logic
   const header = document.querySelector("header");
@@ -113,28 +153,6 @@ import logoSquare from "../../assets/logo-shape-square.png";
       if (next) next.scrollIntoView({ behavior: "smooth" });
     });
   }
-
-  // Typed.js
-  const typedElement = document.getElementById("typed-output");
-  if (typedElement) {
-    new Typed("#typed-output", {
-      strings: [
-        "Your Business",
-        "Your System",
-        "Your Development",
-        "Your Learning",
-        "Your Research",
-        "Your MLOps",
-        "Your Site Reliability",
-      ],
-      typeSpeed: 60,
-      backSpeed: 40,
-      backDelay: 2000,
-      loop: true,
-      showCursor: true,
-      cursorChar: "|",
-    });
-  }
 </script>
 
 <style is:global>
@@ -160,6 +178,7 @@ import logoSquare from "../../assets/logo-shape-square.png";
     logoSquareUrl: `url(${logoSquare.src})`,
   }}
 >
+  /* Aether Lens: Monitoring Premium Aesthetics */
   .hero-container {
     --hero-bg: #fff;
     --hero-text: #000;
@@ -186,6 +205,10 @@ import logoSquare from "../../assets/logo-shape-square.png";
     --hero-text: #fff;
     --mask-fill: #000;
     --glow-color: rgba(59, 130, 246, 0.2);
+  }
+  :global([data-theme="dark"]) .content-inner {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
   }
 
   /* Full Screen Background Visual */
@@ -284,9 +307,12 @@ import logoSquare from "../../assets/logo-shape-square.png";
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    /* Adding subtle backdrop if background makes text hard to read */
     padding: 3rem;
     border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   h1 {
@@ -303,8 +329,40 @@ import logoSquare from "../../assets/logo-shape-square.png";
       0 4px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .sub-heading {
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    height: 120px; /* Allocated height to prevent layout shift */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1.5rem;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    opacity: 0;
+    transition:
+      opacity 0.8s ease-in-out,
+      transform 0.8s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .sub-heading {
+    /* Container styles handled by carousel-slide */
   }
 
   .main-line {
@@ -313,6 +371,7 @@ import logoSquare from "../../assets/logo-shape-square.png";
     color: var(--hero-text);
     opacity: 0.95;
     text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.5rem;
   }
 
   .sub-line {
@@ -326,7 +385,7 @@ import logoSquare from "../../assets/logo-shape-square.png";
   .highlight-text {
     border-bottom: 2px solid currentColor;
     display: inline-block;
-    min-width: 8em;
+    padding-bottom: 2px;
   }
 
   .tagline {
@@ -437,6 +496,9 @@ import logoSquare from "../../assets/logo-shape-square.png";
       flex-direction: column;
       width: 100%;
       align-items: center;
+    }
+    .carousel-track {
+      height: 160px; /* Slightly taller for mobile text wrapping */
     }
   }
 </style>

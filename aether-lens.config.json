@@ -7,6 +7,7 @@
             "aesthetics",
             "performance"
         ],
+        "custom_instruction": "Astro/Starlight サイトの検証: 1. ビジュアル回帰（Hero, CardGrid）, 2. マルチデバイス（Desktop, Mobile）, 3. コマンド（Build check）を優先してください。",
         "ai_agent": {
             "mode": "proactive",
             "analysis_targets": [

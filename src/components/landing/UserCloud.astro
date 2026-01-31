@@ -1,0 +1,127 @@
+---
+const users = [
+  {
+    name: "RE-X",
+    description: "Revolutionizing Experience",
+    logo: "http://www.re-x.info/wp-content/uploads/2026/01/testaaaa-scaled.png",
+  },
+];
+---
+
+<section class="user-cloud">
+  <h2>User Cloud</h2>
+  <p class="subtitle">Trusted by innovative teams</p>
+
+  <div class="grid">
+    {
+      users.map((user) => (
+        <a
+          href="https://github.com/aether-platform/aether-lens"
+          class="user-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="logo-container">
+            {user.logo ? (
+              <img src={user.logo} alt={user.name} />
+            ) : (
+              <span class="logo-text">{user.name}</span>
+            )}
+          </div>
+        </a>
+      ))
+    }
+
+    <!-- Add Your Company Card -->
+    <a
+      href="https://github.com/aether-platform/aether-lens/issues/new?template=company_addition_request.yml"
+      class="user-card add-card"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="logo-container">
+        <span class="plus-icon">+</span>
+        <span class="add-text">Add Yours</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+  .user-cloud {
+    padding: 4rem 1rem;
+    text-align: center;
+    background: var(--sl-color-bg);
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--sl-color-white);
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: var(--sl-color-gray-3);
+    margin-bottom: 3rem;
+  }
+
+  .grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .user-card {
+    width: 160px;
+    height: 100px;
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .user-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-gray-5);
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--sl-color-white);
+    letter-spacing: 1px;
+  }
+
+  .add-card {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  .add-card .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .plus-icon {
+    font-size: 2rem;
+    color: var(--sl-color-accent);
+    line-height: 1;
+  }
+
+  .add-text {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-3);
+  }
+</style>

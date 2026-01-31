@@ -173,79 +173,9 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
-"ja/pricing.mdx": {
-	id: "ja/pricing.mdx";
-  slug: "ja/pricing";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
 "ja/technology/ai-vibecoding.mdx": {
 	id: "ja/technology/ai-vibecoding.mdx";
   slug: "ja/technology/ai-vibecoding";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/aetherterm/overview.mdx": {
-	id: "ja/tutorials/aetherterm/overview.mdx";
-  slug: "ja/tutorials/aetherterm/overview";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/aetherterm/security-scan.mdx": {
-	id: "ja/tutorials/aetherterm/security-scan.mdx";
-  slug: "ja/tutorials/aetherterm/security-scan";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/cloud-ide/ai-coding.mdx": {
-	id: "ja/tutorials/cloud-ide/ai-coding.mdx";
-  slug: "ja/tutorials/cloud-ide/ai-coding";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/cloud-ide/connect-local.mdx": {
-	id: "ja/tutorials/cloud-ide/connect-local.mdx";
-  slug: "ja/tutorials/cloud-ide/connect-local";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/cloud-ide/overview.mdx": {
-	id: "ja/tutorials/cloud-ide/overview.mdx";
-  slug: "ja/tutorials/cloud-ide/overview";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/deployment/active-snyk.mdx": {
-	id: "ja/tutorials/deployment/active-snyk.mdx";
-  slug: "ja/tutorials/deployment/active-snyk";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/languages/nextjs-deployment.mdx": {
-	id: "ja/tutorials/languages/nextjs-deployment.mdx";
-  slug: "ja/tutorials/languages/nextjs-deployment";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/languages/node-frontend.mdx": {
-	id: "ja/tutorials/languages/node-frontend.mdx";
-  slug: "ja/tutorials/languages/node-frontend";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"ja/tutorials/languages/python-ai.mdx": {
-	id: "ja/tutorials/languages/python-ai.mdx";
-  slug: "ja/tutorials/languages/python-ai";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

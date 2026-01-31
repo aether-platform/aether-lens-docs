@@ -3,19 +3,34 @@ title: AIエージェント構成
 description: Aether Lensを支えるAIエージェントのアーキテクチャ。
 ---
 
-# AI Agent Architecture
+# AI Agent Architecture (VTI)
 
-Aether Lensの心臓部は、独自のAI解析エンジンです。
+Aether Lens の心臓部は、独自の **Vibe Test Insight (VTI)** 解析エンジンです。単なる静的解析や Diff 検知を超え、開発者の「意図」を多角的に理解します。
+
+## Aether Platform Context
+
+VTI 解析は Aether Platform の広大なコンテキストを活用します。
+
+- **Platform Intelligence**: クラウド上のインフラ、デプロイ状態、リソース統計などを解析の文脈に自動注入。
+- **Shared Insights**: 個人の DevLoop で得られた知見をプラットフォーム全体で共有し、チームの生産性を向上。
 
 ## 3層の解析ロジック
 
 1. **Context Reaper**:
-   プロジェクトの構成、依存関係、過去の変更履歴を常時モニタリング。
+   プロジェクトの構成だけでなく、Aether Platform 上の環境設定を常時モニタリング。
 2. **Intent Scouter**:
-   開発者のコード編集から「何を検証したいのか」を推論。
+   Git 差分から「開発者のバイブス」と「システムへの影響」を多角的に把握。
 3. **Action Weaver**:
-   推論に基づき、Playwrightのスクリプトやバイジュアル検証のパラメータをリアルタイム生成。
+   推論に基づき、クラウド環境（Browserless 等）での最適な実行アクションを構成。
+
+## 解析のオプショナル・コントロール
+
+標準ではフルオートで動作しますが、開発者は以下の「ノブ」を操作して解析を微調整できます。
+
+- **Frontend Strategy**: UI 回帰を強制。
+- **Backend Strategy**: ロジック解析を優先。
+- **Custom Instructions**: `aether-lens.config.json` による独自ルールの注入。
 
 ## Aether Platform との統合
 
-Aether Platformの `AI Namespace` 内でサンドボックス実行されるため、安全にプロジェクト全体の解析を行うことができます。
+Aether Platform のセキュアなインフラ上で実行されるため、大規模なプロジェクト解析も高速かつ安全に行うことができます。解析結果は MCP (Model Context Protocol) を通じて、外部の AI エージェントへも共有されます。
