@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - release/cloudflare
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -27,22 +28,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to Cloudflare Pages (Preview)
-        if: github.ref == 'refs/heads/main'
-        uses: cloudflare/wrangler-action@v3
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=aether-lens-docs --branch=main
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-
-      - name: Deploy to Cloudflare Pages (Production)
-        if: github.ref == 'refs/heads/release/cloudflare'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=aether-lens-docs
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: aether-lens-docs
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }} # main or release/cloudflare
+          workingDirectory: .
