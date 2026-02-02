@@ -20,6 +20,14 @@ Aether Lens の全機能を利用するには、以下のいずれかの LLM と
 - **Google**: Gemini 1.5 Pro
 - **Azure OpenAI**: (Configurable via `aether-lens.config.json`)
 
+### 🚀 Execution Modes (Task Offloading)
+
+Aether Lens は、テストの実行場所を柔軟に切り替えることができます。タスクそのものをコンテナ環境へオフロードすることで、ローカルマシンの負荷を最小限に抑えます。
+
+- **Local**: 高速な単体テストや軽いスクリプトの実行に。
+- **Docker**: 本番に近い環境で、依存関係を含めた完全なテストを実行。
+- **Kubernetes**: Aether Platform のクラスタパワーを使い、大規模な並列テストを実行。
+
 ## Aether Platform との統合
 
 Aether Lens は Aether Platform のエコシステムに深く統合されています。プラットフォームが提供する実行基盤と AI コンテキストにより、複雑な設定なしで高度な解析が可能です。
@@ -77,7 +85,9 @@ Playwright を使用して、ヘッドレスブラウザ上で実際の描画結
 
 ### 🧩 Aggregation Layer (Multi-Layer Test)
 
-Aether Lens は、異なるレイヤーのテストを束ねる **Aggregation Layer** として機能します。単なるテストランナーではなく、各種ツール（Jest, Playwright, Backend Check）の指揮者として振る舞います。
+Aether Lens は、あらゆる種類のテスト・タスク実行結果を束ねる **Unified Aggregation Layer** として機能します。
+
+フロントエンドの VRT 結果も、バックエンドの単体テスト結果も、全て等価な「イベント」として処理されます。これにより、特定の言語やフレームワークに依存せず、プロジェクト全体の品質ステータスを一元的に可視化します。
 
 ```mermaid
 graph TD

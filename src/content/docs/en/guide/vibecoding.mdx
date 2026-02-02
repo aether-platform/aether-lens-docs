@@ -65,6 +65,14 @@ Ensures logical correctness by running scripts or tools within the project.
 - **Test Runner**: Extracts and runs only relevant tests from existing suites like Jest, Vitest, or Pytest (Smart Selection).
 - **Linter / Formatter**: Provides instant feedback on style violations before pushing to CI.
 
+### 🚀 Execution Modes (Task Offloading)
+
+Aether Lens allows you to flexibly switch where tests are executed. By offloading tests to container environments, you minimize the load on your local machine.
+
+- **Local**: For fast unit tests and lightweight script execution.
+- **Docker**: Executes complete tests, including dependencies, in an environment close to production.
+- **Kubernetes**: Leverages the cluster power of Aether Platform for large-scale parallel testing.
+
 ### Browser Execution Strategies
 
 Choose where to execute verifications based on project size and environment.
@@ -77,7 +85,9 @@ Choose where to execute verifications based on project size and environment.
 
 ### 🧩 Aggregation Layer (Multi-Layer Test)
 
-Aether Lens functions as an **Aggregation Layer** that bundles tests from different layers. Rather than just a test runner, it acts as a conductor for various tools (Jest, Playwright, Backend Check).
+Aether Lens functions as a **Unified Aggregation Layer** that bundles execution results from all types of tests and tasks.
+
+Frontend VRT results and backend unit test results are all processed as equivalent "events." This centrally visualizes the quality status of the entire project, independent of specific languages or frameworks.
 
 ```mermaid
 graph TD

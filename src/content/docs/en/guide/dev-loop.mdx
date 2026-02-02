@@ -68,6 +68,23 @@ As soon as you start `watch` mode, the Local DevLoop begins.
 aether-lens-cli . --watch
 ```
 
+### 4. Running Test Suites (One-Shot Execution)
+
+To run a full verification once without watch mode, execute the command without flags. This is ideal for CI/CD pipelines or a final check before committing.
+
+```bash
+aether-lens-cli .
+```
+
+Aether Lens checks project configuration files (like `package.json`, `pyproject.toml`) to automatically detect and run the optimal test runner (Jest, Vitest, Pytest).
+
+> [!TIP]
+> **Running All Tests**
+> To force execution of all tests, including those unrelated to current changes, use the `--all` flag.
+> ```bash
+> aether-lens-cli . --all
+> ```
+
 > [!NOTE]
 > **Monitoring the entire workspace**
 > By specifying a target directory (e.g., `./sample`), you can also monitor only specific microservices or components.
