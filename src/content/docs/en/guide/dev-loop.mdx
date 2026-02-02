@@ -78,12 +78,32 @@ aether-lens-cli .
 
 Aether Lens checks project configuration files (like `package.json`, `pyproject.toml`) to automatically detect and run the optimal test runner (Jest, Vitest, Pytest).
 
+---
+
+## 🔁 Lens Loop (Continuous Verification)
+
+**Lens Loop** is a high-speed feedback loop provided by the Aether Lens CLI, with **MCP (Model Context Protocol)** as its core interface. Autonomous verification repeats "in the background" without the developer needing to be aware of it.
+
+### How it Works (Background Loop)
+1. **Watch & Execute**: The moment a file is saved, the CLI starts verification in the background, without taking over the developer's terminal.
+2. **MCP Context**: Execution results, screenshots, and logs are automatically streamed as MCP resources.
+3. **Shadow Collaboration**: AI agents (like Antigravity) constantly monitor the background state via MCP and suggest fixes on the spot if issues arise.
+
+### Configuration
+Customize the behavior in the `dev_loop` section of `aether-lens.config.json`.
+
+```json
+{
+  "dev_loop": {
+    "auto_verify": true,
+    "browser_targets": ["desktop", "mobile"]
+  }
+}
+```
+
 > [!TIP]
-> **Running All Tests**
-> To force execution of all tests, including those unrelated to current changes, use the `--all` flag.
-> ```bash
-> aether-lens-cli . --all
-> ```
+> **Using in K8s Environments**:
+> By setting `browser_strategy: "remote"`, you can run the loop using the Aether Platform infrastructure in the cloud instead of consuming local machine resources.
 
 > [!NOTE]
 > **Monitoring the entire workspace**

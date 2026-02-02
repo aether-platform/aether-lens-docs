@@ -12,27 +12,48 @@ Aether Lens is designed as a bridge between the developer's local environment (C
 ```mermaid
 graph LR
     U[Developer] --> CLI[Aether Lens CLI]
-    CLI --> AI[Vibe Reader / AI]
+    CLI --> MCP[MCP Server]
+    MCP --> Agent[AI Agent / Antigravity]
     CLI --> EX[Execution Layer]
-    EX --> Local[Local]
-    EX --> Cloud[Aether Platform]
+    EX --> Pod[K8s Pod / Docker]
 ```
 
-### 1. CLI Agent
-Acts as the frontend of Aether Lens, responsible for file monitoring, presenting summaries to the user, and interacting with the AI.
+### 1. CLI & MCP Server
+In addition to its CLI functionality, Aether Lens operates as an **MCP (Model Context Protocol) server**. This allows AI agents to directly reference current test statuses and "vibes".
 
 ### 2. Vibe Reader (AI)
 Interprets the "intent" of the code from `git diff`, deriving the optimal set of tests to run and providing corrective insights.
 
 ### 3. Execution Layer (Unified Task Runner)
-An abstraction layer that offloads the execution of tasks themselves to **Docker containers** or **Kubernetes Pods**.
-The developer's local machine acts merely as a "control terminal," while heavy build processes and test executions are handled in isolated environments. This prevents local environment pollution and guarantees that the entire team verifies in an identical environment.
+Ather Lens dispatches tasks to **Docker containers** or **Kubernetes Pods** via an abstraction layer.
+The developer's local machine acts as a control terminal, while heavy build processes and test executions are offloaded to isolated environments. This prevents local environment pollution and ensures consistency across the team.
+
+---
+
+## 🧠 Edge AI & NPU Acceleration (2026 Standard)
+
+Aether Lens is optimized for modern hardware evolution, specifically the widespread adoption of **NPUs (Neural Processing Units)** in 2026.
+
+- **Local Inference**: Before sending large datasets (logs, source code, screenshots) to cloud LLMs, lightweight edge models on the local NPU perform primary analysis (distillation).
+- **Token Efficiency**: By sending only refined "Insights," it reduces token costs by up to 1/100.
+- **Privacy First**: Raw data stays local, allowing sensitive projects to benefit from AI securely.
+- **Hardware Agnostic**: Systems without NPUs automatically fallback to CPU/GPU processing or cloud-side aggregation proxying.
 
 ## Data Flow (Unified Aggregation)
 
-Aether Lens centrally manages all execution results as "Insights," regardless of whether they are Frontend or Backend.
+Aether Lens centrally manages all execution results as "Insights," regardless of whether they are Frontend or Backend. A key feature is "Shadow Verification," which operates autonomously in the background without interrupting the developer, and "Layered Context Provisioning" that prevents AI context waste.
 
-1. **Trigger**: Detects file changes or manual triggers.
-2. **Dispatch**: Dispatches tasks to the optimal runner (Frontend VRT / Backend Test).
-3. **Normalize**: Normalizes different output formats (JSON, JUnit XML, Console) into **Allure-compatible formats**.
-4. **Insight**: Provides unified reports to developers and AI agents. capable of exporting to Allure Reporter for team-wide dashboards.
+### Layered Context (via MCP)
+Information is provided in two layers to allow AI agents to operate efficiently.
+
+1. **Layer 1: Semantic Summary (High-Level)**
+   - Pass/Fail status, confidence scores, and AI summaries.
+   - Always included in the agent's context, minimizing token consumption.
+2. **Layer 2: Raw Evidence (On-Demand)**
+   - Complete execution logs (raw data), detailed screenshots, and trace info.
+   - Exposed as MCP **Resources**. Only "referenced" when the agent deems it necessary (e.g., on verification failure), preventing unnecessary token consumption.
+
+1. **Autonomous Watch**: The CLI detects file changes in milliseconds, and AI determines the verification requirements.
+2. **Background Execution**: While the developer is coding, tasks are executed in the background on Docker/K8s.
+3. **MCP Sync (Normalize)**: Normalizes outputs from various tools into Allure-compatible formats and aggregates them to the MCP server.
+4. **Instant Insight**: When verification succeeds or issues are found, the AI agent provides insights without interruption.
