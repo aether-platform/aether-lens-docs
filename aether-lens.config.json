@@ -2,6 +2,12 @@
     "project_name": "aether-lens-docs",
     "strategy": "auto",
     "browser_strategy": "docker",
+    "npu_acceleration": true,
+    "cost_efficiency_mode": "maximum",
+    "mcp_server": {
+        "enabled": true,
+        "port": 9000
+    },
     "vibecoding": {
         "theme": "premium-dark",
         "focus": [
@@ -9,7 +15,7 @@
             "aesthetics",
             "performance"
         ],
-        "custom_instruction": "Astro/Starlight サイトの検証: 1. ビジュアル回帰（Hero, CardGrid）, 2. マルチデバイス（Desktop, Mobile）, 3. コマンド（Build check）を優先してください。",
+        "custom_instruction": "Astro/Starlight サイトの検証: 1. NPUを活用したログの要約を優先, 2. トークン節約のための階層化コンテキスト（VTI）を適用, 3. ビジュアル回帰（Hero, CardGrid）とビルドチェックを統合してください。",
         "ai_agent": {
             "mode": "proactive",
             "analysis_targets": [
@@ -20,6 +26,7 @@
     },
     "dev_loop": {
         "auto_verify": true,
+        "shadow_verification": true,
         "browser_targets": [
             "desktop",
             "mobile"

@@ -70,4 +70,22 @@ AI エージェント (Claude / AntiGravity) に特定バージョンを使わ�
 }
 ```
 
-このように設定することで、チーム全体で常に同じバージョンの「動く仕様書」としての Aether Lens を共有できます。
+## トラブルシューティング
+
+### プロキシ環境下での実行エラー (SOCKS)
+
+`HTTP_PROXY` が SOCKS プロキシ（`socks5h://...`）に設定されている場合、実行時に `socksio` パッケージが見つからないエラーが発生することがあります。
+
+**回避方法 1: 一時的にプロキシを無効化して実行**
+```bash
+HTTP_PROXY= HTTPS_PROXY= uvx --from git+https://github.com/aether-platform/aether-lens aether-lens-cli check
+```
+
+**回避方法 2: `httpx[socks]` を含めてインストール**
+```bash
+uv pip install 'httpx[socks]'
+```
+
+---
+
+このように設定することで、チーム全体で常に同じバージョンの「動く仕様書」としての Aether Lens を共有し、NPU を活用した低コストな開発ループを実現できます。

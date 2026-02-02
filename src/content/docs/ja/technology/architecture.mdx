@@ -32,11 +32,11 @@ Aether Lens は CLI としての機能に加え、**MCP (Model Context Protocol)
 
 ## 🧠 Edge AI & NPU Acceleration (2026 Standard)
 
-Aether Lens は、2026年時点でのハードウェアの進化、特に **NPU (Neural Processing Unit)** の普及に最適化されています。
+Aether Lens は、2026年時点でのハードウェアの進化、特に **NPU (Neural Processing Unit)** による「真の低コスト開発」に最適化されています。
 
-- **Local Inference**: 実行ログ、ソースコード、スクリーンショットなどの巨大なデータをクラウド LLM に送る前に、ローカル NPU 上の軽量エッジモデルが一次解析（蒸留）を行います。
-- **Token Efficiency**: 解析結果の「インサイト（結論）」のみをクラウドへ送ることで、トークンコストを最大 1/100 まで削減します。
-- **Privacy First**: 生データがローカルから出ないため、機密性の高いプロジェクトでも安心して AI の恩恵を受けられます。
+- **Local Inference**: 実行ログ、ソースコード、スクリーンショットなどの巨大なデータをクラウド LLM に送る前に、ローカル NPU 上の軽量エッジモデルが一次解析（蒸留）を行い、不要なデータを削ぎ落します。
+- **Token Efficiency**: 解析結果の「インサイト（結論）」のみをクラウドへ送ることで、トークン費用を最大 1/100 まで削減します。
+- **Eco-System**: 通信量を最小化することで、ネットワーク負荷を抑え、オフラインに近い感覚で高速にフィードバックを得られます。
 - **Hardware Agnostic**: NPU がない環境では自動的に CPU/GPU 処理にフォールバック、あるいはクラウド側での集約代行へと切り替わります。
 
 - **Build Stabilization**: `architecture.mdx` のフロントエンド修正時に欠落した frontmatter を復元し、ドキュメントのビルドエラーを解消。
