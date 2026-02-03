@@ -1,0 +1,171 @@
+---
+const activities = [
+  {
+    type: "build",
+    hash: "b921c8d",
+    msg: "Core loop optimized for NPU",
+    status: "success",
+    time: "2m ago",
+  },
+  {
+    type: "mcp",
+    hash: "81e7d8c",
+    msg: "MCP Proxy handshake v2 applied",
+    status: "success",
+    time: "15m ago",
+  },
+  {
+    type: "vti",
+    hash: "a4f2e1c",
+    msg: "Semantic Insight depth increased",
+    status: "success",
+    time: "1h ago",
+  },
+];
+---
+
+<div class="activity-ticker">
+  <div class="ticker-header">
+    <span class="pulse-dot"></span>
+    <span class="title">Nightly Build Stream</span>
+    <span class="version">v0.1.25-nightly</span>
+  </div>
+  <div class="ticker-content">
+    {
+      activities.map((activity) => (
+        <div class="activity-item">
+          <span class={`status-badge ${activity.status}`} />
+          <code class="hash">{activity.hash}</code>
+          <span class="message">{activity.msg}</span>
+          <span class="time">{activity.time}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .activity-ticker {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    margin-bottom: 4rem;
+  }
+
+  .ticker-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+    border-right: 1px solid rgba(148, 163, 184, 0.2);
+    padding-right: 1.5rem;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-white);
+  }
+
+  .version {
+    font-size: 0.75rem;
+    color: var(--color-aether-accent);
+    font-family: var(--sl-font-mono);
+  }
+
+  .ticker-content {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(10%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .activity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .status-badge {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .status-badge.success {
+    background: #10b981;
+  }
+
+  .hash {
+    font-family: var(--sl-font-mono);
+    font-size: 0.8rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .message {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-2);
+  }
+
+  .time {
+    font-size: 0.75rem;
+    color: var(--sl-color-gray-4);
+  }
+
+  @media (max-width: 768px) {
+    .activity-ticker {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .ticker-header {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      padding-bottom: 0.5rem;
+      width: 100%;
+    }
+  }
+</style>

@@ -2,8 +2,6 @@
     "project_name": "aether-lens-docs",
     "strategy": "auto",
     "browser_strategy": "docker",
-    "npu_acceleration": true,
-    "cost_efficiency_mode": "maximum",
     "mcp_server": {
         "enabled": true,
         "port": 9000
@@ -25,8 +23,6 @@
         }
     },
     "dev_loop": {
-        "auto_verify": true,
-        "shadow_verification": true,
         "browser_targets": [
             "desktop",
             "mobile"

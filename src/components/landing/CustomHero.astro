@@ -5,41 +5,41 @@ import { LinkButton } from "@astrojs/starlight/components";
 const slides = [
   {
     title: "Vibe Test Insight",
-    sub: "Intent-Based Self-Correction",
+    sub: "Semantic Engine v2.0",
     detail:
-      "コードの差分ではなく「意図」を解析。AIが最適な検証セットを自律的に構成します。",
+      "コードの変化を「意味」として抽出。AIが自律的に最適な検証シナリオを選択・実行します。",
   },
   {
-    title: "NPU Accelerated",
-    sub: "Cost Efficient Dev Loop",
+    title: "Cost Efficient",
+    sub: "NPU Accelerated Loop",
     detail:
-      "2026年の標準機能。ローカル NPU を活用し、トークン消費を最小化しながら爆速で検証環境を回し続けます。",
+      "ローカル NPU での蒸留処理により、クラウド送信データを 1/100 に削減。無限の検証を圧倒的コストパフォーマンスで。",
   },
   {
-    title: "Autonomous Lens Loop",
-    sub: "Background Shadow Verification",
+    title: "Nightly Stream",
+    sub: "Rapid Evolution Loop",
     detail:
-      "Docker/K8s 上で裏側で常に働き続ける。開発者の手を止めず、環境構築や検証の待ち時間をゼロにする設計。",
+      "現在 b921c8d (Nightly) が稼働中。開発者のフィードバックを即座に機能へ反映する爆速リリースサイクル。",
   },
   {
     title: "MCP Synergy",
-    sub: "Token-Smart Collaboration",
+    sub: "Layered Intel Sync",
     detail:
-      "MCP 経由で AI エージェントとリアルタイム同期。階層化データにより、知性を浪費せず効率を最大化します。",
+      "階層化コンテキストを MCP 経由で共有。AI エージェントと視覚・論理をリアルタイムに同期させます。",
   },
 ];
 ---
 
 <div class="hero-wrapper">
   <div class="glow-sphere"></div>
+  <div class="scanning-bar"></div>
 
   <div class="hero-content">
     <div class="branding">
+      <div class="badge-nightly">Nightly b921c8d</div>
       <span class="aether-lens">Aether Lens</span>
       <span class="separator">|</span>
-      <span class="new-value">New Value "Vibe Test Insights"</span>
-      <span class="by">by</span>
-      <span class="platform">Aether Platform</span>
+      <span class="new-value">Unified Insights</span>
     </div>
 
     <div class="carousel" id="hero-carousel">
@@ -85,8 +85,10 @@ const slides = [
       }
     </div>
 
-    {/* Visual Anchor: Terminal / Dashboard Mockup */}
     <div class="visual-anchor">
+      <div class="lens-scanner">
+        <div class="scanner-circle"></div>
+      </div>
       <div class="terminal-window">
         <div class="terminal-header">
           <div class="buttons">
@@ -94,32 +96,31 @@ const slides = [
             <span class="dot yellow"></span>
             <span class="dot green"></span>
           </div>
-          <div class="terminal-title">aether-lens --watch</div>
+          <div class="terminal-title">
+            aether-lens-cli check --target=premium
+          </div>
         </div>
         <div class="terminal-body">
           <div class="line">
-            <span class="cmd">aether-lens</span> init <span class="success"
-              >✔ done</span
+            <span class="cmd">aether-lens</span> check <span class="success"
+              >✔ b921c8d</span
             >
           </div>
           <div class="line">
-            <span class="info">i</span> Watching for changes in <span
-              class="path">src/</span
-            >...
-          </div>
-          <div class="line">
-            <span class="highlight">Change detected:</span> CustomHero.astro
-          </div>
-          <div class="line">
-            Running <span class="type">Vibe Analysis</span>...
-          </div>
-          <div class="line">
-            <span class="success">✔ Visual Regression passed (3 viewports)</span
+            <span class="info">HW</span> NPU detected: <span class="type"
+              >Active (vTI-8)</span
             >
           </div>
           <div class="line">
-            <span class="insight">Insight:</span> "Hero component aesthetics improved.
-            Performance within limits."
+            <span class="highlight">Analyze Intent:</span> Refactoring CustomHero
+            UI
+          </div>
+          <div class="line">
+            Distilling data... <span class="success">99.8% token saved</span>
+          </div>
+          <div class="line">
+            <span class="insight">Insight:</span> "Aesthetics match premium standards.
+            Verified in 250ms."
           </div>
           <div class="cursor"></div>
         </div>
@@ -163,6 +164,19 @@ const slides = [
     });
 
     startAutoPlay();
+
+    // Scanning Lens mouse movement
+    const wrapper = document.querySelector(".hero-wrapper");
+    const scanner = document.querySelector(".scanner-circle");
+    if (wrapper && scanner) {
+      wrapper.addEventListener("mousemove", (e: any) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        (scanner as HTMLElement).style.setProperty("--x", `${x}px`);
+        (scanner as HTMLElement).style.setProperty("--y", `${y}px`);
+      });
+    }
   }
 </script>
 
@@ -170,7 +184,7 @@ const slides = [
   .hero-wrapper {
     position: relative;
     width: 100vw;
-    min-height: 90vh;
+    min-height: 95vh;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
@@ -178,36 +192,63 @@ const slides = [
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #030712; /* Very dark slate */
+    background: #020617; /* Slate 950 */
     overflow: hidden;
     padding: 6rem 2rem;
   }
 
+  .scanning-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-aether-accent),
+      transparent
+    );
+    opacity: 0.3;
+    animation: scan-y 8s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes scan-y {
+    0% {
+      top: 0;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+
   .glow-sphere {
     position: absolute;
-    width: 60vw;
-    height: 60vw;
+    width: 70vw;
+    height: 70vw;
     background: radial-gradient(
       circle,
       var(--color-aether-primary),
       transparent 70%
     );
-    opacity: 0.15;
-    filter: blur(80px);
-    top: -20%;
-    left: 20%;
+    opacity: 0.12;
+    filter: blur(100px);
+    top: -10%;
+    left: 15%;
     z-index: 1;
-    animation: pulse 10s infinite alternate;
+    animation: drift 20s linear infinite;
   }
 
-  @keyframes pulse {
-    from {
-      transform: scale(1);
-      opacity: 0.1;
+  @keyframes drift {
+    0% {
+      transform: translate(0, 0);
     }
-    to {
-      transform: scale(1.2);
-      opacity: 0.2;
+    50% {
+      transform: translate(5%, 5%);
+    }
+    100% {
+      transform: translate(0, 0);
     }
   }
 
@@ -220,34 +261,36 @@ const slides = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .branding {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     font-family: var(--sl-font-display);
     font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    padding: 0.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    padding: 0.4rem 1.2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 99px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     color: var(--sl-color-gray-2);
   }
 
-  .branding .aether-lens {
-    color: var(--sl-color-white);
+  .badge-nightly {
+    background: var(--color-aether-accent);
+    color: #020617;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
   }
 
-  .branding .by {
-    opacity: 0.5;
-    font-weight: 400;
-    font-size: 0.75rem;
+  .branding .aether-lens {
+    color: #fff;
   }
 
   .carousel {
@@ -258,7 +301,7 @@ const slides = [
 
   .carousel-inner {
     position: relative;
-    height: 280px; /* Base height to prevent jump */
+    height: 260px;
   }
 
   .slide {
@@ -267,206 +310,166 @@ const slides = [
     left: 0;
     width: 100%;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.98) translateY(10px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
   }
 
   .slide.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
     pointer-events: auto;
   }
 
   h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3.5rem, 9vw, 6.5rem);
     font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.04em;
   }
 
   .gradient-text {
-    background: var(--color-aether-gradient);
+    background: linear-gradient(
+      to right,
+      #fff 20%,
+      var(--color-aether-accent) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    display: inline-block;
   }
 
   .sub-heading {
-    font-size: clamp(1.25rem, 3vw, 2rem);
-    font-weight: 600;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
     color: var(--sl-color-gray-2);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
   }
 
   .detail-text {
     font-size: 1.125rem;
     color: var(--sl-color-gray-3);
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
     line-height: 1.6;
+    opacity: 0.8;
   }
 
   .carousel-nav {
     display: flex;
     justify-content: center;
-    gap: 0.75rem;
-    margin-top: 2rem;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
   }
 
   .nav-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
-    padding: 0;
     cursor: pointer;
     transition: all 0.3s ease;
   }
 
   .nav-dot.active {
-    background: var(--color-aether-primary);
-    transform: scale(1.3);
-    box-shadow: 0 0 15px var(--color-aether-primary);
+    background: var(--color-aether-accent);
+    box-shadow: 0 0 10px var(--color-aether-accent);
   }
 
   .hero-actions {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
+    margin-top: 1rem;
   }
 
-  /* Visual Anchor: Terminal Mockup */
   .visual-anchor {
+    position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
     margin-top: 2rem;
-    perspective: 1000px;
+    perspective: 1200px;
+  }
+
+  .lens-scanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .scanner-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--color-aether-accent);
+    border-radius: 50%;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%);
+    box-shadow:
+      inset 0 0 30px rgba(6, 182, 212, 0.2),
+      0 0 50px rgba(6, 182, 212, 0.1);
+    backdrop-filter: contrast(1.2) brightness(1.1);
+    transition:
+      top 0.1s ease-out,
+      left 0.1s ease-out;
   }
 
   .terminal-window {
-    background: #0f172a;
+    background: rgba(15, 23, 42, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    box-shadow: var(--shadow-premium);
+    border-radius: 16px;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.7);
     overflow: hidden;
-    transform: rotateX(5deg);
-    transition: transform 0.5s ease;
-  }
-
-  .terminal-window:hover {
-    transform: rotateX(0deg) translateY(-5px);
+    transform: rotateX(8deg);
+    backdrop-filter: blur(20px);
   }
 
   .terminal-header {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.8rem 1.2rem;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .terminal-header .buttons {
-    display: flex;
-    gap: 6px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-  .dot.red {
-    background: #ef4444;
-  }
-  .dot.yellow {
-    background: #f59e0b;
-  }
-  .dot.green {
-    background: #10b981;
-  }
-
-  .terminal-title {
-    flex-grow: 1;
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--sl-color-gray-3);
-    font-family: var(--sl-font-mono, monospace);
-    opacity: 0.8;
   }
 
   .terminal-body {
-    padding: 1.5rem;
+    padding: 2rem;
     text-align: left;
     font-family: var(--sl-font-mono, monospace);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: #e2e8f0;
+    font-size: 0.95rem;
+    color: #cbd5e1;
   }
 
-  .line {
-    margin-bottom: 0.25rem;
-  }
-  .cmd {
-    color: #60a5fa;
-    font-weight: bold;
-  }
   .success {
     color: #10b981;
   }
-  .info {
-    color: #3b82f6;
-    font-weight: bold;
-  }
   .highlight {
-    color: #c084fc;
+    color: #818cf8;
     font-weight: bold;
-  }
-  .type {
-    color: #f472b6;
   }
   .insight {
     color: #fbbf24;
-    font-weight: bold;
     background: rgba(251, 191, 36, 0.1);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  .path {
-    color: #94a3b8;
-    font-style: italic;
-  }
-
-  .cursor {
-    display: inline-block;
-    width: 8px;
-    height: 1.2em;
-    background: #60a5fa;
-    vertical-align: middle;
-    margin-left: 4px;
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
+    padding: 4px 8px;
+    border-radius: 6px;
   }
 
   @media (max-width: 768px) {
-    .hero-wrapper {
-      padding: 4rem 1rem;
-    }
     .carousel-inner {
-      height: 380px;
+      height: 400px;
     }
     .hero-actions {
       flex-direction: column;
       width: 100%;
-      align-items: stretch;
+    }
+    .scanner-circle {
+      display: none;
     }
   }
 </style>

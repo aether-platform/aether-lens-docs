@@ -34,14 +34,13 @@ The developer's local machine acts as a control terminal, while heavy build proc
 
 Aether Lens is optimized for the hardware evolution of 2026, specifically achieving a **Cost Efficient Dev Loop** via **NPUs (Neural Processing Units)**.
 
-- **Local Inference**: Before sending large datasets (logs, source code, screenshots) to cloud LLMs, lightweight edge models on the local NPU perform primary analysis (distillation) to strip away redundant data.
-- **Token Efficiency**: By sending only refined "Insights," it reduces token expenses by up to 1/100.
-- **Eco-System**: Minimizing data transfer reduces network load and enables rapid feedback with near-offline speed.
-- **Hardware Agnostic**: Systems without NPUs automatically fallback to CPU/GPU processing or cloud-side aggregation proxying.
+- **Token Efficiency (via Layered Context)**: By prioritizing refined "Insights" sent via MCP, it reduces token expenses by up to 1/100. See [Layered Context (via MCP)](#layered-context-via-mcp) for details.
+- **Eco-System**: Minimizing data transfer reduces network load and enables rapid feedback.
+- **Autonomous Hardware Detection**: NPU instruction sets are supported at the binary level as a 2026 standard. No configuration is required. The system automatically detects hardware presence and selects the optimized path (distillation process). It transparently falls back to CPU/GPU on systems without NPUs.
 
 ## Data Flow (Unified Aggregation)
 
-Aether Lens centrally manages all execution results as "Insights," regardless of whether they are Frontend or Backend. A key feature is "Shadow Verification," which operates autonomously in the background without interrupting the developer, and "Layered Context Provisioning" that prevents AI context waste.
+Aether Lens centrally manages all execution results as "Insights," regardless of whether they are Frontend or Backend. Key pillars include **Shadow Verification (Core Default)**, which operates autonomously in the background without interrupting the developer, and **Layered Context Provisioning** that prevents AI context waste.
 
 ### Layered Context (via MCP)
 Information is provided in two layers to allow AI agents to operate efficiently.

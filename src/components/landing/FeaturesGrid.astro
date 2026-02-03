@@ -1,43 +1,73 @@
 ---
 const features = [
   {
+    id: "cost",
     title: "Cost Efficiency",
     description:
-      "NPU によるエッジ解析でクラウドへの送信トークンを極限まで削減。圧倒的な低コストで無限の Dev Loop を実現します。",
+      "NPU によるエッジ解析でクラウド送信トークンを最大 90% 削減。「無限の検証」を現実的なコストで実現します。",
     icon: "💰",
+    tag: "99.8% Saved",
     color: "#10b981",
+    size: "large",
   },
   {
-    title: "VTI Reading",
+    id: "vti",
+    title: "vTI Reading",
     description:
-      "差分ではなく「意図」を解析。AIが最適な検証シナリオを自動構成し、あなたの開発リズムを自律的に守ります。",
+      "差分ではなく「意図」を解析。AI が最適な検証シナリオを自動構成し、開発リズムを守ります。",
     icon: "👁️",
+    tag: "Semantic Engine",
     color: "var(--color-aether-primary)",
+    size: "portrait",
   },
   {
-    title: "Lens Loop",
-    description:
-      "保存からインサイト提供まで数秒。Docker/K8s 上でバックグラウンド検証を回し続ける、究極の開発ループ。",
-    icon: "🔁",
-    color: "var(--color-aether-accent)",
-  },
-  {
+    id: "mcp",
     title: "MCP Synergy",
     description:
-      "MCP 経由で AI エージェントとリアルタイム同期。階層化されたコンテキストにより、知性を極限まで加速させます。",
+      "AI エージェントとリアルタイム同期。階層化コンテキストにより、知性を極限まで加速。",
     icon: "🤝",
+    tag: "Realtime Sync",
     color: "#8b5cf6",
+    size: "landscape",
+  },
+  {
+    id: "loop",
+    title: "Lens Loop",
+    description:
+      "Nightly ストリームにより、最新の検証ロジックが常にあなたの手元に届きます。",
+    icon: "🔁",
+    tag: "Nightly b921c8d",
+    color: "var(--color-aether-accent)",
+    size: "square",
+  },
+  {
+    id: "shadow",
+    title: "Shadow Verification",
+    description:
+      "設定不要。保存した瞬間、裏側で静かに、かつ確実に検証が走り出します。",
+    icon: "🛡️",
+    tag: "Zero Config",
+    color: "#f43f5e",
+    size: "square",
   },
 ];
 ---
 
-<div class="features-grid">
+<div class="bento-grid">
   {
-    features.map((feature) => (
-      <div class="feature-card" style={`--accent-color: ${feature.color}`}>
-        <div class="icon-wrapper">{feature.icon}</div>
-        <h3>{feature.title}</h3>
-        <p>{feature.description}</p>
+    features.map((f) => (
+      <div class={`bento-card ${f.size}`} style={`--accent-color: ${f.color}`}>
+        <div class="card-glass" />
+        <div class="card-content">
+          <div class="header">
+            <span class="icon">{f.icon}</span>
+            <span class="tag">{f.tag}</span>
+          </div>
+          <div class="body">
+            <h3>{f.title}</h3>
+            <p>{f.description}</p>
+          </div>
+        </div>
         <div class="glow" />
       </div>
     ))
@@ -45,58 +75,105 @@ const features = [
 </div>
 
 <style>
-  .features-grid {
+  .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 1.5rem;
     padding: 2rem 0;
   }
 
-  .feature-card {
+  .bento-card {
     position: relative;
-    background: var(--color-surface-glass);
-    border: 1px solid var(--border-glass);
-    border-radius: 1.5rem;
-    padding: 3rem 2rem;
+    border-radius: 24px;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .bento-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-color);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  .large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .portrait {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  .landscape {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .square {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .card-glass {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent);
+    z-index: 1;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    cursor: default;
+    margin-bottom: 2rem;
   }
 
-  .feature-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--accent-color);
-    background: rgba(var(--accent-color), 0.02);
-    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4);
+  .icon {
+    font-size: 2.5rem;
   }
 
-  .icon-wrapper {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
-    transition: transform 0.5s ease;
-  }
-
-  .feature-card:hover .icon-wrapper {
-    transform: scale(1.2) rotate(5deg);
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 99px;
+    color: var(--sl-color-gray-3);
   }
 
   h3 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    margin-bottom: 1rem;
-    color: var(--sl-color-white);
+    color: #fff;
+    margin-bottom: 0.75rem;
   }
 
   p {
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     color: var(--sl-color-gray-3);
     margin: 0;
+  }
+
+  /* Specific adjustment for large cards */
+  .large h3 {
+    font-size: 2rem;
+  }
+  .large p {
+    font-size: 1.1rem;
   }
 
   .glow {
@@ -113,16 +190,35 @@ const features = [
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
-  .feature-card:hover .glow {
-    opacity: 0.1;
+  .bento-card:hover .glow {
+    opacity: 0.15;
   }
 
-  @media (max-width: 768px) {
-    .feature-card {
-      padding: 2rem 1.5rem;
+  @media (max-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .large,
+    .portrait,
+    .landscape,
+    .square {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    .bento-grid {
+      grid-auto-rows: auto;
+    }
+    .card-content {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

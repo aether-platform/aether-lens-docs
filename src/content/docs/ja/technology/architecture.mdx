@@ -34,10 +34,9 @@ Aether Lens は CLI としての機能に加え、**MCP (Model Context Protocol)
 
 Aether Lens は、2026年時点でのハードウェアの進化、特に **NPU (Neural Processing Unit)** による「真の低コスト開発」に最適化されています。
 
-- **Local Inference**: 実行ログ、ソースコード、スクリーンショットなどの巨大なデータをクラウド LLM に送る前に、ローカル NPU 上の軽量エッジモデルが一次解析（蒸留）を行い、不要なデータを削ぎ落します。
-- **Token Efficiency**: 解析結果の「インサイト（結論）」のみをクラウドへ送ることで、トークン費用を最大 1/100 まで削減します。
-- **Eco-System**: 通信量を最小化することで、ネットワーク負荷を抑え、オフラインに近い感覚で高速にフィードバックを得られます。
-- **Hardware Agnostic**: NPU がない環境では自動的に CPU/GPU 処理にフォールバック、あるいはクラウド側での集約代行へと切り替わります。
+- **Token Efficiency (via Layered Context)**: 解析結果の「インサイト（結論）」のみを優先的に MCP 経由で AI へ送ることで、トークン費用を最大 1/100 まで削減します。詳細は [Layered Context via MCP](#layered-context-via-mcp) を参照。
+- **Eco-System**: データ転送量を最小化することで、ネットワーク負荷を抑え、高速なフィードバックを得られます。
+- **Autonomous Hardware Detection**: 2026年標準の NPU 命令セットをバイナリレベルでサポート。設定ファイルでの指定は不要で、ハードウェアの存在を自動検知して最適化パス（蒸留プロセス）を選択します。NPU がない環境では、透過的に CPU/GPU 処理にフォールバックします。
 
 - **Build Stabilization**: `architecture.mdx` のフロントエンド修正時に欠落した frontmatter を復元し、ドキュメントのビルドエラーを解消。
 - **Brand Story Alignment**: ランディングページ（Hero, FeaturesGrid）を更新し、**「シャドウ検証（裏側での自動実行）」**や**「MCP 経由の AI 協調」**、**「階層化されたコンテキストによるトークン節約」**といった最新の強みをフロントに配置。
@@ -58,6 +57,6 @@ AI エージェントが効率的に動作できるよう、情報を 2 つの�
    - MCP の **Resources** として露出。エージェントが必要（検証失敗時など）と判断した際にのみ「参照」され、無駄なトークン消費を防ぎます。
 
 1. **Autonomous Watch**: CLI がファイルの変更をミリ秒単位で検知し、AI が検証の要件を判断。
-2. **Background Execution**: 開発者がコードを書いている間に、Docker/K8s 上でタスクがバックグラウンド実行される。
+2. **Shadow Verification (Core Default)**: 開発者がコードを保存した瞬間、バックグラウンドで自律的に検証を開始。設定不要で常に「作業の正しさ」を監視し続けます。
 3. **MCP Sync (Normalize)**: 各ツールの出力を Allure 互換形式で MCP サーバーへ正規化・集約。
 4. **Instant Insight**: 検証に成功、または問題が発見されると、AI エージェントが割り込みなしでインサイトを提供。
