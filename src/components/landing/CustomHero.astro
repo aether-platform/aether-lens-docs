@@ -212,6 +212,7 @@ const slides = [
     opacity: 0.3;
     animation: scan-y 8s ease-in-out infinite;
     z-index: 2;
+    pointer-events: none; /* Ensure scanning bar doesn't block */
   }
 
   @keyframes scan-y {
@@ -238,6 +239,7 @@ const slides = [
     left: 15%;
     z-index: 1;
     animation: drift 20s linear infinite;
+    pointer-events: none; /* Ensure sphere doesn't block */
   }
 
   @keyframes drift {
@@ -362,6 +364,8 @@ const slides = [
     justify-content: center;
     gap: 0.8rem;
     margin-top: 1.5rem;
+    position: relative;
+    z-index: 30; /* Ensure nav is above scanner */
   }
 
   .nav-dot {
@@ -371,6 +375,7 @@ const slides = [
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    pointer-events: auto; /* Ensure clickable */
   }
 
   .nav-dot.active {
@@ -382,6 +387,8 @@ const slides = [
     display: flex;
     gap: 1.5rem;
     margin-top: 1rem;
+    position: relative;
+    z-index: 30; /* Ensure actions are above scanner */
   }
 
   .visual-anchor {
@@ -399,7 +406,7 @@ const slides = [
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none; /* CRITICAL: prevent blocking */
     z-index: 20;
   }
 
@@ -419,6 +426,7 @@ const slides = [
     transition:
       top 0.1s ease-out,
       left 0.1s ease-out;
+    pointer-events: none; /* CRITICAL: prevent blocking */
   }
 
   .terminal-window {

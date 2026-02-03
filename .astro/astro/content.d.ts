@@ -201,6 +201,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"en/technology/architecture.mdx": {
+	id: "en/technology/architecture.mdx";
+  slug: "en/technology/architecture";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "ja/guide/comparison.mdx": {
 	id: "ja/guide/comparison.mdx";
   slug: "ja/guide/comparison";
@@ -246,6 +253,13 @@ declare module 'astro:content' {
 "ja/technology/ai-vibecoding.mdx": {
 	id: "ja/technology/ai-vibecoding.mdx";
   slug: "ja/technology/ai-vibecoding";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"ja/technology/architecture.mdx": {
+	id: "ja/technology/architecture.mdx";
+  slug: "ja/technology/architecture";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
